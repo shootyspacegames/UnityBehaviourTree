@@ -75,6 +75,19 @@ public class SetMoveTargetToMoveCommandTarget<T> : Leaf<T> where T : NpcContext,
     }
 }
 
+public class SetMoveTargetToInteractTarget<T> : Leaf<T> where T : NpcContext, IInteractContext, IMoveContext
+{
+    public override NodeStatus OnBehave(T state)
+    {
+       state.MoveTarget = state.Interactable.transform.position;
+        return NodeStatus.SUCCESS;
+    }
+
+    public override void OnReset()
+    {
+    }
+}
+
 public class SetMoveTargetToDefendThingTarget<T> : Leaf<T> where T : NpcContext, ICommandable, IMoveContext
 {
     public override NodeStatus OnBehave(T state)
@@ -93,6 +106,7 @@ public class CleanMoveTargetState<T> : Leaf<T> where T : NpcContext, ICommandabl
     public override NodeStatus OnBehave(T state)
     {
         state.MoveCommandTarget = null;
+        state.ClearCommandState();
         return NodeStatus.SUCCESS;
     }
 

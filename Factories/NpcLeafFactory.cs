@@ -5,7 +5,7 @@ using System.Runtime.InteropServices.ComTypes;
 
 public static class NpcLeafFactory
 {
-    public static Node<T> test<T>() where T : NpcContext, ICommandable, IMoveContext, IHasResourceTarget, ILook, IHasEnemyContext
+    public static Node<T> DefaultFriendlyBehaviour<T>() where T : NpcContext, ICommandable, IMoveContext, IHasResourceTarget, ILook, IHasEnemyContext, IInteractContext
     {
         var stopMoving = new Sequence<T>("Stop Moving if given command",
                 new IsAwaitingCommand<T>(),
@@ -19,10 +19,25 @@ public static class NpcLeafFactory
                 RetreatCommand<T>(),
                 DefendThing<T>(),
                 DefendPlace<T>(),
+                InteractWith<T>(),
                 stopMoving,
                 new HasUpdatedCommand<T>()
             );
 
+        return holder;
+    }
+
+    public static Node<T> InteractWith<T>() where T : NpcContext, IInteractContext, IMoveContext, ILook, ICommandable
+    {
+        var holder = new Sequence<T>( "Interact Command",
+            new NpcCommandTruthy<T>(NpcCommands.INTERACT),
+            new Sequence<T>("Move to interact range",
+                new SetMoveTargetToInteractTarget<T>(),
+                new MoveToInteractRange<T>(),
+                new InteractWithTarget<T>(),
+                new CleanInteractState<T>()
+            )
+        );
         return holder;
     }
 
