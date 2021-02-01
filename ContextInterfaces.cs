@@ -12,6 +12,11 @@ public interface IHasEnemyContext
     GameObject Enemy { get; set; }
 }
 
+public interface IInteractContext
+{
+    GameObject Interactable { get; set; }
+}
+
 public interface IHasResourceTarget
 {
     ResourceNode ResourceNode { get; set; }
@@ -37,4 +42,5 @@ public interface ICommandable
     GameObject DefendThingCommandTarget { get; set; }
     Vector3? DefendPlaceCommandTarget { get; set; }
     bool IsRetreating { get; set; }
+    void ClearCommandState();
 }

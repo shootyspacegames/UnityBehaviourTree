@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FriendlyNpcContext : NpcContext, IMoveContext, IHasEnemyContext, IHasResourceTarget, ILook, ICommandable
+public class FriendlyNpcContext : NpcContext, IMoveContext, IHasEnemyContext, IHasResourceTarget, ILook, ICommandable, IInteractContext
 {
     public GameObject Enemy { get; set; }
     public ResourceNode ResourceNode { get; set; }
@@ -15,4 +15,11 @@ public class FriendlyNpcContext : NpcContext, IMoveContext, IHasEnemyContext, IH
     public Vector3? DefendPlaceCommandTarget { get; set; }
     public bool IsRetreating { get; set; }
     public bool UpdatedCommand { get; set; }
+    public GameObject Interactable { get; set; }
+
+    public void ClearCommandState()
+    {
+        this.RecievedCommand = NpcCommands.IDLE;
+        this.AwaitingCommand = true;
+    }
 }
