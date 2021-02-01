@@ -38,9 +38,8 @@ public interface ICommandable
     bool AwaitingCommand { get; set; }
     bool UpdatedCommand { get; set; }
     NpcCommands RecievedCommand { get; set; }
-    Vector3? MoveCommandTarget { get; set; }
-    GameObject DefendThingCommandTarget { get; set; }
-    Vector3? DefendPlaceCommandTarget { get; set; }
+    GameObject CommandTarget { get; set; }
+    Vector3? CommandHitPoint { get; set; }
     bool IsRetreating { get; set; }
     void ClearCommandState();
 }

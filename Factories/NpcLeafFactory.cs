@@ -47,7 +47,7 @@ public static class NpcLeafFactory
             new NpcCommandTruthy<T>(NpcCommands.MOVE),
             new Interruptor<T>("Break move for enemy",
                 new Sequence<T>("Move Body",
-                    new SetMoveTargetToMoveCommandTarget<T>(),
+                    new SetMoveTargetToCommandHitPoint<T>(),
                     new Move<T>(5f),
                     new CleanMoveTargetState<T>()
                 ),
@@ -64,7 +64,7 @@ public static class NpcLeafFactory
             new Interruptor<T>("Break harvest for enemy",
                 new Selector<T>("harvest Body",
                     new Sequence<T>("Harvest Move",
-                        new SetMoveTargetToMoveCommandTarget<T>(),
+                        new SetMoveTargetToCommandHitPoint<T>(),
                         new Move<T>(5f),
                         new CleanMoveTargetState<T>()
                     ),
@@ -83,7 +83,7 @@ public static class NpcLeafFactory
             new Interruptor<T>("Break defence for new command",
                 new Selector<T>("Defend Location Body",
                     new Sequence<T>("Defend place Move",
-                        new SetMoveTargetToMoveCommandTarget<T>(),
+                        new SetMoveTargetToCommandHitPoint<T>(),
                         new Move<T>(5f)
                     )
                 ),
@@ -100,7 +100,7 @@ public static class NpcLeafFactory
             new Interruptor<T>("Break defence for new command",
                 new Selector<T>("Defend thing Body",
                     new Sequence<T>("Defend thing Move",
-                        new SetMoveTargetToDefendThingTarget<T>(),
+                        new SetMoveTargetToCommandTarget<T>(),
                         new Move<T>(8f)
                     )
                 ),
@@ -116,7 +116,7 @@ public static class NpcLeafFactory
             new NpcCommandTruthy<T>(NpcCommands.RETREAT),
             new Interruptor<T>("Break Retreat for new command",
                 new Sequence<T>("Retreat Body",
-                    new SetMoveTargetToMoveCommandTarget<T>(),
+                    new SetMoveTargetToCommandHitPoint<T>(),
                     new Move<T>(5f),
                     new CleanMoveTargetState<T>()
                 ),

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class FriendlyNpcContext : NpcContext, IMoveContext, IHasEnemyContext, IHasResourceTarget, ILook, ICommandable, IInteractContext
 {
@@ -11,11 +9,11 @@ public class FriendlyNpcContext : NpcContext, IMoveContext, IHasEnemyContext, IH
     public bool AwaitingCommand { get; set; }
     public NpcCommands RecievedCommand { get; set; }
     public Vector3? MoveCommandTarget { get; set; }
-    public GameObject DefendThingCommandTarget { get; set; }
-    public Vector3? DefendPlaceCommandTarget { get; set; }
     public bool IsRetreating { get; set; }
     public bool UpdatedCommand { get; set; }
     public GameObject Interactable { get; set; }
+    public GameObject CommandTarget { get; set; }
+    public Vector3? CommandHitPoint { get; set; }
 
     public void ClearCommandState()
     {
